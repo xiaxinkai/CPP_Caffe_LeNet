@@ -8,11 +8,11 @@ int main(int argc,char* argv[]) {
     typedef float type;
     type ary[28*28];
 
-	//ÔÚ28*28µÄÍ¼Æ¬ÑÕÉ«ÎªRGB(255,255,255)±³¾°ÉÏĞ´RGB(0,0,0)Êı×Ö.
+	//åœ¨28*28çš„å›¾ç‰‡é¢œè‰²ä¸ºRGB(255,255,255)èƒŒæ™¯ä¸Šå†™RGB(0,0,0)æ•°å­—.
     cv::Mat gray(28,28,CV_8UC1,cv::Scalar(255));
     cv::putText(gray,argv[3],cv::Point(4,22),5,1.4,cv::Scalar(0),2);
 
-	//½«Í¼ÏñµÄÊıÖµ´Óuchar[0,255]×ª»»³Éfloat[0.0f,1.0f],µÄÊı, ÇÒÑÕÉ«È¡Ïà·´µÄ .
+	//å°†å›¾åƒçš„æ•°å€¼ä»uchar[0,255]è½¬æ¢æˆfloat[0.0f,1.0f],çš„æ•°, ä¸”é¢œè‰²å–ç›¸åçš„ .
     for(int i=0;i<28*28;i++){
 			// f_val =(255-uchar_val)/255.0f
             ary[i] = static_cast<type>(gray.data[i]^0xFF)*0.00390625;	
@@ -24,7 +24,7 @@ int main(int argc,char* argv[]) {
     //set cpu running software
     Caffe::set_mode(Caffe::CPU);
 
-    //load net file	, caffe::TEST ÓÃÓÚ²âÊÔÊ±Ê¹ÓÃ
+    //load net file	, caffe::TEST ç”¨äºæµ‹è¯•æ—¶ä½¿ç”¨
     Net<type> lenet(argv[1],caffe::TEST);
 
     //load net train file caffemodel
@@ -54,11 +54,11 @@ int main(int argc,char* argv[]) {
 		index=i;
     }
 
-	// ´òÓ¡Õâ´ÎÔ¤²â[0,9]µÄÃ¿Ò»¸öÖÃĞÅ¶È
+	// æ‰“å°è¿™æ¬¡é¢„æµ‹[0,9]çš„æ¯ä¸€ä¸ªç½®ä¿¡åº¦
     for(int i=0;i<10;i++)
 		cout<<i<<"\t"<<begin[i]<<endl;
 
-	// Õ¹Ê¾×îºóµÄÔ¤²â½á¹û
+	// å±•ç¤ºæœ€åçš„é¢„æµ‹ç»“æœ
     cout<<"res:\t"<<index<<"\t"<<begin[index]<<endl;
     return 0;
 }
